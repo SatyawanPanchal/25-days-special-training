@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <h1>Products</h1>
+
+    <div class="products"></div>
+
+    <script>
+      const products = [
+        {
+          id: 1,
+          name: "Premium Leather Notebook",
+          price: 799,
+          description:
+            "Elegant premium leather-bound notebook for professionals.",
+          image: "./assets/1.jpeg",
+        },
+        {
+          id: 2,
+          name: "Luxury Fountain Pen",
+          price: 1499,
+          description:
+            "Smooth writing luxury fountain pen with metallic finish.",
+          image: "./assets/2.jpeg",
+        },
+        {
+          id: 3,
+          name: "Executive Desk Organizer",
+          price: 1299,
+          description: "Premium wooden desk organizer for modern workspaces.",
+          image: "./assets/3.jpg",
+        },
+        {
+          id: 4,
+          name: "Designer Gift Box Set",
+          price: 2199,
+          description:
+            "Exclusive premium stationery gift set for special occasions.",
+          image: "./assets/4.webp",
+        },
+      ];
+
+      const productsDiv = document.querySelector(".products");
+
+      // method 1
+      products.forEach((product) => {
+        return (productsDiv.innerHTML += `
+        <div class="card">
+          <img src="${product.image}" alt="${product.name}">
+          <h3>${product.name}</h3>
+          <p>${product.description.slice(0, 50)}...</p>
+          <p class="price">₹${product.price}</p>
+          <button>Add to Cart</button>
+        </div>
+      `);
+      });
+
+      // method 2
+      // Clear container first
+      productsDiv.innerHTML = "";
+
+      products.forEach((product) => {
+        // Create card div
+        const card = document.createElement("div");
+        card.className = "card";
+
+        // image
+        const img = document.createElement("img");
+        img.src = product.image;
+        img.alt = product.name;
+
+        // title
+        const title = document.createElement("h3");
+        title.textContent = product.name;
+
+        // description
+        const desc = document.createElement("p");
+        desc.textContent = product.description.slice(0, 50) + "...";
+
+        // price
+        const price = document.createElement("p");
+        price.className = "price";
+        price.textContent = "₹" + product.price;
+
+        // Create button
+        const button = document.createElement("button");
+        button.textContent = "Add to Cart";
+
+        // Append all elements to card
+        card.appendChild(img);
+        card.appendChild(title);
+        card.appendChild(desc);
+        card.appendChild(price);
+        card.appendChild(button);
+
+        // Append card to products container
+        productsDiv.appendChild(card);
+      });
+    </script>
+  </body>
+</html>
